@@ -11,7 +11,7 @@ function KnowledgeCardEdition ({ knowledge }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    fetch('http://localhost:3001/knowledges', {
+    fetch('/knowledges', {
       method: 'POST',
       body: JSON.stringify(edition),
       headers:{
@@ -32,15 +32,23 @@ function KnowledgeCardEdition ({ knowledge }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <legend>We parse the following information from the page, you can change it and save as you want adding notes !</legend>
-      <label htmlFor="title">Title</label><br></br>
-      <input id="title" type="text" name="title" onChange={handleChange} value={edition.title}></input><br></br>
-      <label htmlFor="description">Description</label><br></br>
-      <input id="description" type="text" name="description" onChange={handleChange} value={edition.description}></input><br></br>
-      <label htmlFor="notes">Notes</label><br></br>
-      <textarea id="notes" type="textarea" name="notes" onChange={handleChange} value={edition.notes}></textarea><br></br>
-      <button type="submit">Save</button>
+    <form className="flex flex-col mb-2"
+      onSubmit={handleSubmit}>
+      <legend>We were able to get the following information</legend>
+      <label className="text-sm text-gray-600"
+        htmlFor="title">Title</label>
+      <input className="w-full border-solid border-2 rounded-md mb-2 py-2 px-4"
+        id="title" type="text" name="title" onChange={handleChange} value={edition.title}></input>
+      <label className="text-sm text-gray-600"
+        htmlFor="description">Description</label>
+      <input className="w-full border-solid border-2 rounded-md mb-2 py-2 px-4"
+        id="description" type="text" name="description" onChange={handleChange} value={edition.description}></input>
+      <label className="text-sm text-gray-600"
+        htmlFor="notes">Notes</label>
+      <textarea className="w-full border-solid border-2 rounded-md mb-2 py-2 px-4"
+        id="notes" type="textarea" name="notes" onChange={handleChange} value={edition.notes}></textarea>
+      <button className="bg-indigo-600 text-white font-semibold py-2 px-4 border border-indigo-400 rounded shadow"
+        type="submit">Save</button>
     </form>
   )
 }
