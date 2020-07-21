@@ -16,10 +16,13 @@ function KnowledgeCard ({ knowledge }) {
           <img className="h-32 w-40 object-cover rounded-l-lg"
             src={knowledge.imageUrl} alt={knowledge.title}/>
         </div>
-        <div className="w-2/3 p-2">
+        <div className="w-2/3 p-2 flex flex-col">
           <h2 className="text-gray-900 font-bold">{truncate(knowledge.title, 25)}</h2>
-          <p className="text-xs text-gray-600">
-            {truncate(knowledge.description, 100)}
+          <p className="text-xs text-gray-600 mb-1">
+            {truncate(knowledge.description, 90)}
+          </p>
+          <p className="text-xs text-gray-600 font-medium flex flex-col justify-end h-full">
+            <span>#article</span>
           </p>
         </div>
       </article>

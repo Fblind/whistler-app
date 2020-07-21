@@ -16,7 +16,7 @@ function Knowledge (props) {
       const index = Math.floor(Math.random() * list.length)
       return list[index]
     }
-    const colors = ['red', 'gray', 'blue']
+    const colors = ['red', 'blue', 'pink', 'yellow', 'green']
     const color = getRandom(colors)
     return (
       <li className="inline mr-2 text-sm text-gray-600">
