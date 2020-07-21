@@ -22,7 +22,7 @@ function KnowledgeCard ({ knowledge }) {
             {truncate(knowledge.description, 90)}
           </p>
           <p className="text-xs text-gray-600 font-medium flex flex-col justify-end h-full">
-            <span>#article</span>
+            <span>#{knowledge.type}</span>
           </p>
         </div>
       </article>

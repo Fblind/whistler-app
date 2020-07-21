@@ -32,7 +32,7 @@ function Knowledge (props) {
         <h1 className="text-center text-2xl font-bold text-gray-900">{knowledge.title}</h1>
         <p className="text-sm text-indigo-600 text-center mb-6"><a href={knowledge.url}>Go to original</a></p>
         <ul>
-          {knowledge.tags && knowledge.tags.length && knowledge.tags.map(tag => tagLayout(tag))}
+          {knowledge.tags && knowledge.tags.length > 0 ? knowledge.tags.map(tag => tagLayout(tag)) : null}
         </ul>
         <div className="mt-2">
           <h2 className="text-lg text-gray-600 font-bold">Description</h2>

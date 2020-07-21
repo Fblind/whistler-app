@@ -21,7 +21,10 @@ function Knowledges () {
   return (
     <div className="mt-6 w-full px-4">
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Directory</h1>
-      <h2 className="text-lg text-gray-600 font-bold">Topics</h2>
+      <div className="flex flex-row justify-between items-center">
+        <h2 className="text-lg text-gray-600 font-bold">Topics</h2>
+        <a className="text-indigo-600 text-sm">View all</a>
+      </div>
       <TopicCarousel topics={topics}></TopicCarousel>
       <div className="flex flex-row justify-between items-center">
         <h2 className="text-lg text-gray-600 font-bold">Recents</h2>
