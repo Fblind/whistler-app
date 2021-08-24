@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import "./Knowledge.css";
 import { useParams } from "react-router-dom";
+import { Player } from "../components/Player";
 
 function Knowledge(props) {
   const { id } = useParams();
@@ -59,6 +60,13 @@ function Knowledge(props) {
                 controls
               />
             </div>
+            <hr className="mt-4"></hr>
+          </div>
+        ) : null}
+        {knowledge.type === "audio" ? (
+          <div className="mt-2">
+            <h2 className="text-lg text-gray-600 font-bold">Audio</h2>
+            <Player knowledge={knowledge} />
             <hr className="mt-4"></hr>
           </div>
         ) : null}
