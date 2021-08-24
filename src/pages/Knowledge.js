@@ -1,44 +1,67 @@
-import React, { useEffect, useState } from 'react'
-import './Knowledge.css'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import ReactPlayer from "react-player";
+import "./Knowledge.css";
+import { useParams } from "react-router-dom";
 
-function Knowledge (props) {
-  const { id } = useParams()
-  const [knowledge, setKnowledge] = useState({})
+function Knowledge(props) {
+  const { id } = useParams();
+  const [knowledge, setKnowledge] = useState({});
   useEffect(() => {
     fetch(`/knowledges/${id}`)
-      .then(r => r.json())
-      .then(knowledge => setKnowledge(knowledge))
-  }, [id])
+      .then((r) => r.json())
+      .then((knowledge) => setKnowledge(knowledge));
+  }, [id]);
 
   const tagLayout = (tag) => {
     const getRandom = (list) => {
-      const index = Math.floor(Math.random() * list.length)
-      return list[index]
-    }
-    const colors = ['red', 'blue', 'pink', 'yellow', 'green']
-    const color = getRandom(colors)
+      const index = Math.floor(Math.random() * list.length);
+      return list[index];
+    };
+    const colors = ["red", "blue", "pink", "yellow", "green"];
+    const color = getRandom(colors);
     return (
       <li className="inline mr-2 text-sm text-gray-600">
-        <span className={`font-bold text-${color}-600`}>#</span>{tag}
+        <span className={`font-bold text-${color}-600`}>#</span>
+        {tag}
       </li>
-    )
-  }
+    );
+  };
 
   return (
     <div>
       <img alt="" title="" src={knowledge.imageUrl} />
       <div className="article p-4">
-        <h1 className="text-center text-2xl font-bold text-gray-900">{knowledge.title}</h1>
-        <p className="text-sm text-indigo-600 text-center mb-6"><a href={knowledge.url}>Go to original</a></p>
+        <h1 className="text-center text-2xl font-bold text-gray-900">
+          {knowledge.title}
+        </h1>
+        <p className="text-sm text-indigo-600 text-center mb-6">
+          <a href={knowledge.url}>Go to original</a>
+        </p>
         <ul>
-          {knowledge.tags && knowledge.tags.length > 0 ? knowledge.tags.map(tag => tagLayout(tag)) : null}
+          {knowledge.tags && knowledge.tags.length > 0
+            ? knowledge.tags.map((tag) => tagLayout(tag))
+            : null}
         </ul>
         <div className="mt-2">
           <h2 className="text-lg text-gray-600 font-bold">Description</h2>
           <p className="text-gray-900">{knowledge.description}</p>
           <hr className="mt-4"></hr>
         </div>
+        {knowledge.type === "video" ? (
+          <div className="mt-2">
+            <h2 className="text-lg text-gray-600 font-bold">Video</h2>
+            {/* TODO: pasarlo a su propio componenet */}
+            <div className="video-responsive">
+              <ReactPlayer
+                url={knowledge.url}
+                width="100%"
+                height="100%"
+                controls
+              />
+            </div>
+            <hr className="mt-4"></hr>
+          </div>
+        ) : null}
         <div className="mt-2">
           <h2 className="text-lg text-gray-600 font-bold">Notes</h2>
           <p className="text-gray-900">{knowledge.notes}</p>
@@ -46,7 +69,7 @@ function Knowledge (props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Knowledge
+export default Knowledge;
