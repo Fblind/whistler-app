@@ -24,6 +24,7 @@ function Parser (props) {
   }
 
   const handleUrlChange = (event) => {
+    if (!event.target.value) return;
     setUrl(event.target.value)
   }
 
@@ -40,7 +41,7 @@ function Parser (props) {
           htmlFor="url">Add a knowledge url</label>
         <input className="w-full border-solid border-2 rounded-md mb-2 py-2 px-4"
           placeholder="Add a knowledge url"
-          id="url" type="url" name="url" title="url to parse" value={url} onChange={handleUrlChange}/>
+          id="url" type="url" name="url" title="url to parse" value={url} required onChange={handleUrlChange}/>
         <button className="bg-indigo-600 text-white font-semibold py-2 px-4 border border-indigo-400 rounded shadow"
           type="submit">Search</button>
       </form>}
