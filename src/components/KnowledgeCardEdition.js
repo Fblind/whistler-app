@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router";
+import { postKnowledge } from "../api-client";
 
 function KnowledgeCardEdition({ knowledge }) {
   const history = useHistory();
@@ -11,18 +12,9 @@ function KnowledgeCardEdition({ knowledge }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("/knowledges", {
-      method: "POST",
-      body: JSON.stringify(edition),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((r) => r.json())
-      .then((d) => {
-        console.log(d);
-        history.push("/");
-      });
+    postKnowledge({ knowledge: edition }).then((d) => {
+      history.push("/");
+    });
   };
 
   const handleChange = (event) => {
@@ -37,8 +29,11 @@ function KnowledgeCardEdition({ knowledge }) {
 
   const handleTagClose = (e, tag) => {
     e.preventDefault();
-    setEdition({ ...edition, tags: edition.tags.filter(_tag => _tag !== tag) });
-  }
+    setEdition({
+      ...edition,
+      tags: edition.tags.filter((_tag) => _tag !== tag),
+    });
+  };
 
   return (
     <form className="flex flex-col mb-2" onSubmit={handleSubmit}>
@@ -76,7 +71,12 @@ function KnowledgeCardEdition({ knowledge }) {
               key={tag}
             >
               {tag}
-              <button className="ml-2 mr-1 text-xs self-start justify-end" onClick={(e) => handleTagClose(e, tag)}>x</button>
+              <button
+                className="ml-2 mr-1 text-xs self-start justify-end"
+                onClick={(e) => handleTagClose(e, tag)}
+              >
+                x
+              </button>
             </span>
           ))
         }
@@ -136,7 +136,14 @@ export default KnowledgeCardEdition;
 
 function Tags({ tags = [], onChange, children }) {
   // TODO: allSuggestions from GET /tags
-  const allSuggestions = ["bash", "node", "javascript", "nodejs", "git", "test"];
+  const allSuggestions = [
+    "bash",
+    "node",
+    "javascript",
+    "nodejs",
+    "git",
+    "test",
+  ];
   const [_currentSuggestionIndex, setCurrentSuggestionIndex] = useState(-1);
   const [_suggestions, setSuggestions] = useState([]);
   const [_tags, setTags] = useState(tags);
@@ -145,7 +152,7 @@ function Tags({ tags = [], onChange, children }) {
 
   useEffect(() => {
     setTags(tags);
-  }, [tags])
+  }, [tags]);
 
   const handleChange = (event) => {
     // const name = event.target.name

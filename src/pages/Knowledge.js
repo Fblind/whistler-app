@@ -3,14 +3,13 @@ import ReactPlayer from "react-player";
 import "./Knowledge.css";
 import { useParams } from "react-router-dom";
 import { Player } from "../components/Player";
+import { getKnowledgeById } from "../api-client";
 
 function Knowledge(props) {
   const { id } = useParams();
   const [knowledge, setKnowledge] = useState({});
   useEffect(() => {
-    fetch(`/knowledges/${id}`)
-      .then((r) => r.json())
-      .then((knowledge) => setKnowledge(knowledge));
+    getKnowledgeById(id).then((knowledge) => setKnowledge(knowledge));
   }, [id]);
 
   const tagLayout = (tag) => {
