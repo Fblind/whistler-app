@@ -33,12 +33,12 @@ function Knowledges() {
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Directory</h1>
       <div className="flex flex-row justify-between items-center">
         <h2 className="text-lg text-gray-600 font-bold">Topics</h2>
-        <a
+        <button
           className="text-indigo-600 text-sm cursor-pointer"
           onClick={resetKnowledges}
         >
           View all
-        </a>
+        </button>
       </div>
       <TopicCarousel
         topics={topics}
@@ -46,7 +46,7 @@ function Knowledges() {
       ></TopicCarousel>
       <div className="flex flex-row justify-between items-center">
         <h2 className="text-lg text-gray-600 font-bold">Recents</h2>
-        <a className="text-indigo-600 text-sm">View all</a>
+        <button className="text-indigo-600 text-sm">View all</button>
       </div>
       {knowledges.map((knowledge) => {
         return <KnowledgeCard key={knowledge.title} knowledge={knowledge} />;
