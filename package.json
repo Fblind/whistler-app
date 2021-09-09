@@ -21,6 +21,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:all": "react-scripts test --watchAll=false --passWithNoTests",
     "eject": "react-scripts eject",
     "start:production": "env-cmd -f .env.production npm run start",
     "build:production": "env-cmd -f .env.production npm run build"
