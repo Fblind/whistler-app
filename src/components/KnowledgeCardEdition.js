@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router";
-import { postKnowledge } from "../api-client";
+import { getTags, postKnowledge, postTag } from "../api-client";
 
 function KnowledgeCardEdition({ knowledge }) {
   const history = useHistory();
@@ -135,15 +135,7 @@ function KnowledgeCardEdition({ knowledge }) {
 export default KnowledgeCardEdition;
 
 function Tags({ tags = [], onChange, children }) {
-  // TODO: allSuggestions from GET /tags
-  const allSuggestions = [
-    "bash",
-    "node",
-    "javascript",
-    "nodejs",
-    "git",
-    "test",
-  ];
+  const [allSuggestions, setAllSuggestions] = useState([]);
   const [_currentSuggestionIndex, setCurrentSuggestionIndex] = useState(-1);
   const [_suggestions, setSuggestions] = useState([]);
   const [_tags, setTags] = useState(tags);
@@ -151,7 +143,16 @@ function Tags({ tags = [], onChange, children }) {
   const inputRef = useRef(null);
 
   useEffect(() => {
+    getTags().then((response) =>
+      setAllSuggestions(response.map((as) => as.name))
+    );
+  }, []);
+
+  useEffect(() => {
     setTags(tags);
+    getTags().then((response) =>
+      setAllSuggestions(response.map((as) => as.name))
+    );
   }, [tags]);
 
   const handleChange = (event) => {
@@ -178,11 +179,14 @@ function Tags({ tags = [], onChange, children }) {
   };
 
   const addTag = (tag) => {
+    if (!allSuggestions.includes(tag)) {
+      postTag({ tag: { name: tag } }).then((response) => console.log(response));
+    }
     if (!_tags.includes(tag)) {
       setTags([..._tags, tag]);
+      setSuggestions([]);
+      onChange([..._tags, tag]);
     }
-    setSuggestions([]);
-    onChange([..._tags, tag]);
   };
 
   const removeTag = (tag) => {
