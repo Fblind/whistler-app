@@ -4,6 +4,7 @@ import "./Knowledge.css";
 import { useParams } from "react-router-dom";
 import { Player } from "../components/Player";
 import { getKnowledgeById } from "../api-client";
+import config from "../config";
 
 function Knowledge(props) {
   const { id } = useParams();
@@ -20,16 +21,28 @@ function Knowledge(props) {
     const colors = ["red", "blue", "pink", "yellow", "green"];
     const color = getRandom(colors);
     return (
-      <li className="inline mr-2 text-sm text-gray-600">
+      <li key={tag} className="inline mr-2 text-sm text-gray-600">
         <span className={`font-bold text-${color}-600`}>#</span>
         {tag}
       </li>
     );
   };
 
+  const fixImageUrl = (event) => {
+    if (event.target && event.target.src) {
+      event.target.src = config.defaultImageUrl;
+    }
+  };
+
   return (
     <div>
-      <img alt="" title="" src={knowledge.imageUrl} />
+      <img
+        className="m-auto inset-x-0"
+        title={knowledge.title}
+        src={knowledge.imageUrl || config.defaultImageUrl}
+        alt={knowledge.title}
+        onError={fixImageUrl}
+      />
       <div className="article p-4">
         <h1 className="text-center text-2xl font-bold text-gray-900">
           {knowledge.title}
