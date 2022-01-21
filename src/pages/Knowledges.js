@@ -30,7 +30,15 @@ function Knowledges() {
 
   return (
     <div className="mt-6 w-full px-4">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Directory</h1>
+      <div class="flex flex-row justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">Directory</h1>
+        <a
+          className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded shadow"
+          href="/parser"
+        >
+          Add
+        </a>
+      </div>
       <div className="flex flex-row justify-between items-center">
         <h2 className="text-lg text-gray-600 font-bold">Topics</h2>
         <button
