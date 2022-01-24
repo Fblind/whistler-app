@@ -40,7 +40,7 @@ function searchReducer(state, action) {
 function search(knowledges, text) {
   return new Promise((resolve, reject) => {
     const results = knowledges.filter((knowledge) => {
-      return knowledge.title.toLowerCase().includes(text);
+      return knowledge.title.toLowerCase().includes(text.toLowerCase());
     });
     setTimeout(() => resolve(results), 1 * 1000);
   });
