@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getKnowledges } from "../api-client";
 import KnowledgeCard from "../components/KnowledgeCard";
+import KnowledgeSearch from "../components/KnowledgeSearch";
 import "./Knowledges.css";
 
 function Knowledges() {
@@ -30,8 +31,8 @@ function Knowledges() {
 
   return (
     <div className="mt-6 w-full px-4">
-      <div class="flex flex-row justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold text-gray-900">Directory</h1>
+      <div className="flex flex-row justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">Directory</h1>
         <a
           className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded shadow"
           href="/parser"
@@ -39,6 +40,7 @@ function Knowledges() {
           Add
         </a>
       </div>
+      <KnowledgeSearch className="mb-6" knowledges={knowledges} />
       <div className="flex flex-row justify-between items-center">
         <h2 className="text-lg text-gray-600 font-bold">Topics</h2>
         <button
