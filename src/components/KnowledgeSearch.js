@@ -51,13 +51,13 @@ function KnowledgeSearch({ className = "", knowledges = [] }) {
     loading: false,
     results: [],
   });
-  const handleSearch = (event) => {
+  const handleSearch = (event, options = {}) => {
     const value = event.target.value;
     if (!value || !value.length) {
       dispatch({ type: RESET });
       return;
     }
-    if (value.length > 3) {
+    if (value.length > 3 || options.force) {
       dispatch({ type: PROGRESS });
       search(knowledges, value).then((results) => {
         dispatch({
@@ -71,7 +71,7 @@ function KnowledgeSearch({ className = "", knowledges = [] }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const text = event.target.elements.search.value;
-    handleSearch({ target: { value: text } });
+    handleSearch({ target: { value: text } }, { force: true });
   };
   return (
     <div className={`${className} flex shadow p-2`}>
