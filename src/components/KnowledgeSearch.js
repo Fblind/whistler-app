@@ -130,7 +130,7 @@ function KnowledgeSearch({ className = "", knowledges = [] }) {
 function SearchResults({ results }) {
   if (!results.length) return null;
   return (
-    <ul className="bg-white w-full mt-2">
+    <ul className="bg-white w-full mt-2 divide-y">
       {results.map((result) => {
         return (
           <li
@@ -138,24 +138,11 @@ function SearchResults({ results }) {
             className="pr-2 py-1 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900"
           >
             <Link to={`/knowledges/${result._id}`} className="flex">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
               {/* <span className={`font-bold text-red-600 text-xs`}>
                 # javascript
               </span>{" "} */}
-              {result.title}
+              <span className="truncate">
+                {result.title}</span>
             </Link>
           </li>
         );
