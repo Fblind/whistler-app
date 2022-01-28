@@ -1,4 +1,4 @@
-// TODO: api client project
+// TODO: api client project (check sos-patita)
 import config from "./config";
 
 function postParser({ url }) {
@@ -8,15 +8,15 @@ function postParser({ url }) {
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((r) => r.json());
+  }).then(handleResponse);
 }
 
 function getKnowledges() {
-  return fetch(`${config.apiUrl}/knowledges`).then((r) => r.json());
+  return fetch(`${config.apiUrl}/knowledges`).then(handleResponse);
 }
 
 function getKnowledgeById(id) {
-  return fetch(`${config.apiUrl}/knowledges/${id}`).then((r) => r.json());
+  return fetch(`${config.apiUrl}/knowledges/${id}`).then(handleResponse);
 }
 
 function postKnowledge({ knowledge }) {
@@ -26,11 +26,11 @@ function postKnowledge({ knowledge }) {
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((r) => r.json());
+  }).then(handleResponse);
 }
 
 function getTags() {
-  return fetch(`${config.apiUrl}/tags`).then((r) => r.json());
+  return fetch(`${config.apiUrl}/tags`).then(handleResponse);
 }
 
 function postTag({ tag }) {
@@ -40,7 +40,19 @@ function postTag({ tag }) {
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((r) => r.json());
+  }).then(handleResponse);
+}
+
+async function throwErrors(response) {
+  const responseBody = await response.json();
+  throw responseBody;
+}
+
+async function handleResponse(response) {
+  if (!response.ok) {
+    return await throwErrors(response);
+  }
+  return await response.json();
 }
 
 export {

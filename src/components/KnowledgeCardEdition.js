@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router";
 import { getTags, postKnowledge, postTag } from "../api-client";
 
-function KnowledgeCardEdition({ knowledge }) {
+function KnowledgeCardEdition({ knowledge, onError }) {
   const history = useHistory();
   const [edition, setEdition] = useState(knowledge);
 
@@ -12,9 +12,11 @@ function KnowledgeCardEdition({ knowledge }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    postKnowledge({ knowledge: edition }).then((d) => {
-      history.push("/");
-    });
+    postKnowledge({ knowledge: edition })
+      .then((d) => {
+        history.push("/");
+      })
+      .catch(onError);
   };
 
   const handleChange = (event) => {
