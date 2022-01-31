@@ -38,7 +38,12 @@ function Parser(props) {
   return (
     <>
       {alert && (
-        <Alert type={alert.type} title={alert.title} message={alert.message} />
+        <Alert
+          type={alert.type}
+          title={alert.title}
+          message={alert.message}
+          onClose={() => setAlert(null)}
+        />
       )}
       <div className="mt-6 w-full px-4">
         <h1 className="text-4xl font-bold text-center mb-6">
